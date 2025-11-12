@@ -6,6 +6,7 @@ import { GlowCard } from "@/components/zena/GlowCard";
 import { Heart, MessageCircle, Users, Sparkles, Star, Zap } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { motion } from "framer-motion";
+import zenaFace from "@/assets/zena-face.png";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -57,29 +58,41 @@ const Index = () => {
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20 flex flex-col items-center text-center space-y-8 relative z-10">
         <motion.div
-          initial={{ scale: 0, rotate: -180 }}
-          animate={{ scale: 1, rotate: 0 }}
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
+          whileHover={{ scale: 1.05, rotate: 2 }}
+          className="relative spray-shadow paint-splatter"
         >
-          <ZenaAvatar size="lg" />
+          <div className="stencil-card rounded-full p-2 bg-background/50 backdrop-blur-sm">
+            <img 
+              src={zenaFace} 
+              alt="ZÉNA" 
+              className="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-4 border-foreground"
+            />
+          </div>
+          {/* Spray paint effects around image */}
+          <div className="absolute -top-4 -right-4 w-12 h-12 bg-zena-turquoise/20 rounded-full blur-xl animate-pulse" />
+          <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-zena-violet/20 rounded-full blur-xl animate-pulse" style={{ animationDelay: '0.5s' }} />
+          <div className="absolute top-1/2 -right-8 w-8 h-8 bg-zena-rose/20 rounded-full blur-lg animate-pulse" style={{ animationDelay: '1s' }} />
         </motion.div>
 
         <motion.h1
-          className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-zena-turquoise via-zena-violet to-zena-rose bg-clip-text text-transparent"
+          className="text-6xl md:text-8xl font-bold stencil-text tracking-wider relative drip-effect"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          ZÉNA, la voix qui relie les cœurs
+          ZÉNA
         </motion.h1>
 
         <motion.p
-          className="text-xl md:text-2xl text-foreground/80 max-w-2xl"
+          className="text-xl md:text-2xl font-bold uppercase tracking-wide max-w-2xl stencil-text"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          L'IA émotionnelle qui aide votre famille à se comprendre, à s'exprimer et à grandir ensemble dans la bienveillance.
+          La Voix Qui Relie Les Cœurs
         </motion.p>
 
         <motion.div
@@ -91,25 +104,17 @@ const Index = () => {
           <Link to="/auth">
             <Button 
               size="lg" 
-              className="bg-gradient-to-r from-zena-turquoise to-zena-violet hover:opacity-90 text-lg px-8 py-6 group relative overflow-hidden"
+              className="text-lg px-8 py-6 graffiti-button spray-paint"
             >
-              <span className="relative z-10 flex items-center gap-2">
-                <Zap className="w-5 h-5" />
-                Commencer l'aventure
-              </span>
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-zena-violet to-zena-rose"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: 0 }}
-                transition={{ duration: 0.3 }}
-              />
+              <Zap className="w-5 h-5 mr-2" />
+              Commencer
             </Button>
           </Link>
           <Link to="/dashboard?demo=true">
             <Button 
               size="lg" 
               variant="outline"
-              className="border-2 border-zena-turquoise text-zena-turquoise hover:bg-zena-turquoise/10 text-lg px-8 py-6"
+              className="text-lg px-8 py-6 graffiti-button spray-paint"
             >
               <Star className="w-5 h-5 mr-2" />
               Essayer la démo
@@ -121,7 +126,7 @@ const Index = () => {
       {/* Values Section */}
       <section className="container mx-auto px-4 py-16 relative z-10">
         <motion.h2
-          className="text-4xl font-bold text-center mb-12 text-foreground"
+          className="text-4xl font-bold text-center mb-12 text-foreground stencil-text"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -144,14 +149,14 @@ const Index = () => {
               transition={{ duration: 0.6, delay: value.delay }}
               whileHover={{ scale: 1.05, y: -5 }}
             >
-              <GlowCard glowColor={value.color} className="p-6 text-center h-full">
+              <GlowCard glowColor={value.color} className="p-6 text-center h-full stencil-card">
                 <motion.div
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.6 }}
                 >
                   <value.icon className={`w-12 h-12 mx-auto mb-4 text-zena-${value.color}`} />
                 </motion.div>
-                <h3 className="font-semibold mb-2 text-foreground">{value.title}</h3>
+                <h3 className="font-semibold mb-2 text-foreground stencil-text">{value.title}</h3>
                 <p className="text-sm text-muted-foreground">{value.desc}</p>
               </GlowCard>
             </motion.div>
@@ -162,7 +167,7 @@ const Index = () => {
       {/* Features Section */}
       <section className="container mx-auto px-4 py-16 relative z-10">
         <motion.h2
-          className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-zena-turquoise to-zena-violet bg-clip-text text-transparent"
+          className="text-4xl font-bold text-center mb-12 stencil-text"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -185,7 +190,7 @@ const Index = () => {
               transition={{ duration: 0.6, delay: feature.delay }}
               whileHover={{ scale: 1.03 }}
             >
-              <GlowCard className="p-8 h-full bg-gradient-to-br from-background/50 to-background/30 backdrop-blur-sm">
+              <GlowCard className="p-8 h-full stencil-card bg-background/50 backdrop-blur-sm">
                 <motion.div
                   className="text-5xl mb-4"
                   whileHover={{ scale: 1.2, rotate: 10 }}
@@ -193,7 +198,7 @@ const Index = () => {
                 >
                   {feature.emoji}
                 </motion.div>
-                <h3 className="text-xl font-semibold mb-4 text-foreground">{feature.title}</h3>
+                <h3 className="text-xl font-semibold mb-4 text-foreground stencil-text">{feature.title}</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   {feature.desc}
                 </p>

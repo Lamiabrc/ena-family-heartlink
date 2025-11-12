@@ -90,21 +90,162 @@
 }
 
 @layer utilities {
+  /* Effets street art améliorés */
   .spray-shadow {
-    filter: drop-shadow(var(--spray-shadow));
+    filter: drop-shadow(0 0 30px hsl(var(--zena-turquoise) / 0.8))
+            drop-shadow(0 0 60px hsl(var(--zena-violet) / 0.6))
+            drop-shadow(0 0 90px hsl(var(--zena-rose) / 0.4));
   }
+
   .stencil-text {
-    text-shadow: var(--stencil-shadow);
+    font-family: 'Impact', 'Helvetica Neue', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5),
+                 -1px -1px 0 rgba(255, 255, 255, 0.1);
   }
+
   .drip-effect {
-    box-shadow: var(--drip-shadow);
+    position: relative;
   }
+
+  .drip-effect::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    width: 3px;
+    height: 20px;
+    background: linear-gradient(180deg, currentColor, transparent);
+    opacity: 0.7;
+    border-radius: 0 0 50% 50%;
+  }
+
   .transition-rough {
-    transition: var(--transition-rough);
+    transition: all 0.15s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
+
   .graffiti-border {
-    border: 3px solid currentColor;
-    border-radius: 0;
+    border: 4px solid currentColor;
+    position: relative;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset,
+                0 0 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .graffiti-border::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border: 2px solid currentColor;
+    opacity: 0.4;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  .graffiti-border::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border: 1px solid currentColor;
+    opacity: 0.2;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  /* Spray paint effect */
+  .spray-paint {
+    position: relative;
+    background: linear-gradient(135deg, 
+      hsl(var(--foreground)) 0%, 
+      hsl(var(--foreground) / 0.95) 100%);
+  }
+
+  .spray-paint::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 30%, 
+      hsl(var(--zena-turquoise) / 0.1) 0%, 
+      transparent 50%),
+      radial-gradient(circle at 80% 70%, 
+      hsl(var(--zena-violet) / 0.1) 0%, 
+      transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Stencil effect pour les cartes */
+  .stencil-card {
+    position: relative;
+    background: hsl(var(--card));
+    border: 3px solid hsl(var(--foreground));
+    box-shadow: 
+      5px 5px 0 rgba(0, 0, 0, 0.3),
+      10px 10px 20px rgba(0, 0, 0, 0.2),
+      inset 0 0 50px rgba(0, 0, 0, 0.1);
+  }
+
+  .stencil-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg,
+      transparent 48%,
+      hsl(var(--foreground) / 0.1) 49%,
+      hsl(var(--foreground) / 0.1) 51%,
+      transparent 52%);
+    background-size: 10px 10px;
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
+  /* Paint splatter effect */
+  .paint-splatter {
+    position: relative;
+  }
+
+  .paint-splatter::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: hsl(var(--zena-turquoise) / 0.3);
+    border-radius: 50% 40% 60% 50%;
+    filter: blur(2px);
+    top: -10px;
+    right: -10px;
+    pointer-events: none;
+  }
+
+  /* Texture graffiti pour les boutons */
+  .graffiti-button {
+    position: relative;
+    background: hsl(var(--primary));
+    border: 3px solid hsl(var(--foreground));
+    font-family: 'Impact', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    box-shadow: 
+      3px 3px 0 hsl(var(--foreground) / 0.3),
+      6px 6px 0 hsl(var(--foreground) / 0.2);
+    transition: all 0.1s ease;
+  }
+
+  .graffiti-button:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 
+      1px 1px 0 hsl(var(--foreground) / 0.3),
+      2px 2px 0 hsl(var(--foreground) / 0.2);
+  }
+
+  .graffiti-button::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg,
+      transparent 30%,
+      hsl(var(--foreground) / 0.05) 50%,
+      transparent 70%);
+    pointer-events: none;
   }
 }
 
