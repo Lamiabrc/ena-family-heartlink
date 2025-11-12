@@ -77,15 +77,13 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: "Helvetica Neue", "Arial Black", sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-family: "Quicksand", "Comic Sans MS", sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.02em;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: "Impact", "Arial Black", sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    text-shadow: var(--stencil-shadow);
+    font-family: "Bungee", "Press Start 2P", sans-serif;
+    letter-spacing: 0.03em;
   }
 }
 
@@ -98,11 +96,8 @@
   }
 
   .stencil-text {
-    font-family: 'Impact', 'Helvetica Neue', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5),
-                 -1px -1px 0 rgba(255, 255, 255, 0.1);
+    font-family: 'Bungee', 'Press Start 2P', sans-serif;
+    letter-spacing: 0.05em;
   }
 
   .drip-effect {
@@ -221,9 +216,8 @@
     position: relative;
     background: hsl(var(--primary));
     border: 3px solid hsl(var(--foreground));
-    font-family: 'Impact', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-family: 'Bungee', sans-serif;
+    letter-spacing: 0.05em;
     box-shadow: 
       3px 3px 0 hsl(var(--foreground) / 0.3),
       6px 6px 0 hsl(var(--foreground) / 0.2);
