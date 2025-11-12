@@ -11,8 +11,16 @@ export function useAuth() {
   const [currentMember, setCurrentMember] = useState<FamilyMember | null>(null);
   const [userRole, setUserRole] = useState<AppRole | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isDemoMode, setIsDemoMode] = useState(false);
 
   useEffect(() => {
+    // Check for demo mode in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('demo') === 'true') {
+      enterDemoMode();
+      return;
+    }
+
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
@@ -130,8 +138,80 @@ export function useAuth() {
   };
 
   const signOut = async () => {
+    if (isDemoMode) {
+      setIsDemoMode(false);
+      setUser(null);
+      setProfile(null);
+      setFamilyMembers([]);
+      setCurrentMember(null);
+      setUserRole(null);
+      window.history.replaceState({}, '', window.location.pathname);
+      return { error: null };
+    }
     const { error } = await supabase.auth.signOut();
     return { error };
+  };
+
+  const enterDemoMode = () => {
+    setIsDemoMode(true);
+    
+    // Create demo user
+    const demoUser = {
+      id: 'demo-user-id',
+      email: 'demo@zenafamily.app',
+      created_at: new Date().toISOString(),
+    } as User;
+    
+    // Create demo profile
+    const demoProfile: Profile = {
+      id: 'demo-user-id',
+      email: 'demo@zenafamily.app',
+      full_name: 'Famille Martin (Démo)',
+      avatar_url: null,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    };
+    
+    // Create demo family members
+    const demoMembers: FamilyMember[] = [
+      {
+        id: 'demo-member-1',
+        family_id: 'demo-family-id',
+        profile_id: 'demo-user-id',
+        role: 'parent',
+        display_name: 'Sophie',
+        age_range: '35-45',
+        is_account_holder: true,
+        created_at: new Date().toISOString(),
+      },
+      {
+        id: 'demo-member-2',
+        family_id: 'demo-family-id',
+        profile_id: 'demo-user-id',
+        role: 'ado',
+        display_name: 'Lucas',
+        age_range: '13-17',
+        is_account_holder: false,
+        created_at: new Date().toISOString(),
+      },
+      {
+        id: 'demo-member-3',
+        family_id: 'demo-family-id',
+        profile_id: 'demo-user-id',
+        role: 'enfant',
+        display_name: 'Emma',
+        age_range: '8-12',
+        is_account_holder: false,
+        created_at: new Date().toISOString(),
+      },
+    ];
+    
+    setUser(demoUser);
+    setProfile(demoProfile);
+    setFamilyMembers(demoMembers);
+    setCurrentMember(demoMembers[0]);
+    setUserRole('parent');
+    setLoading(false);
   };
 
   return {
@@ -142,6 +222,7 @@ export function useAuth() {
     currentMember,
     userRole,
     loading,
+    isDemoMode,
     signUp,
     signIn,
     signOut,

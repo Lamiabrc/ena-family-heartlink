@@ -198,6 +198,17 @@ export default function Auth() {
             </Tabs>
           </CardContent>
         </Card>
+
+        <div className="text-center space-y-2">
+          <p className="text-sm text-muted-foreground">Ou découvrez ZÉNA sans créer de compte</p>
+          <Button
+            variant="outline"
+            className="w-full border-zena-turquoise/30 text-zena-turquoise hover:bg-zena-turquoise/10"
+            onClick={() => navigate("/dashboard?demo=true")}
+          >
+            🎭 Essayer en mode Démo
+          </Button>
+        </div>
       </div>
     </div>
   );

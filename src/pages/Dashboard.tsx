@@ -4,17 +4,18 @@ import { useAuth } from "@/hooks/useAuth";
 import { ZenaAvatar } from "@/components/zena/ZenaAvatar";
 import { GlowCard } from "@/components/zena/GlowCard";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Heart, MessageCircle, Calendar, BookOpen, Users } from "lucide-react";
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const { user, profile, currentMember, loading } = useAuth();
+  const { user, profile, currentMember, loading, isDemoMode } = useAuth();
 
   useEffect(() => {
-    if (!loading && !user) {
+    if (!loading && !user && !isDemoMode) {
       navigate("/auth");
     }
-  }, [user, loading, navigate]);
+  }, [user, loading, isDemoMode, navigate]);
 
   if (loading) {
     return (
@@ -26,7 +27,7 @@ export default function Dashboard() {
     );
   }
 
-  if (!user) return null;
+  if (!user && !isDemoMode) return null;
 
   const firstName = profile?.full_name?.split(' ')[0] || currentMember?.display_name || 'vous';
 
@@ -39,7 +40,14 @@ export default function Dashboard() {
             <div className="flex items-center gap-3">
               <ZenaAvatar size="sm" />
               <div>
-                <h1 className="text-lg font-semibold text-foreground">Bonjour {firstName} ✨</h1>
+                <div className="flex items-center gap-2">
+                  <h1 className="text-lg font-semibold text-foreground">Bonjour {firstName} ✨</h1>
+                  {isDemoMode && (
+                    <Badge variant="outline" className="text-xs border-zena-violet/30 text-zena-violet bg-zena-violet/10">
+                      🎭 Mode Démo
+                    </Badge>
+                  )}
+                </div>
                 <p className="text-sm text-muted-foreground">Comment te sens-tu aujourd'hui ?</p>
               </div>
             </div>
