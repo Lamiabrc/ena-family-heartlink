@@ -101,10 +101,19 @@ const Index = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
         >
+          <Link to="/chat">
+            <Button 
+              size="lg" 
+              className="text-xl px-10 py-7 bg-gradient-to-r from-zena-violet via-zena-rose to-zena-turquoise hover:scale-105 transition-transform shadow-2xl font-bold"
+            >
+              💬 Parler à ZÉNA
+            </Button>
+          </Link>
           <Link to="/auth">
             <Button 
               size="lg" 
-              className="text-lg px-8 py-6 graffiti-button spray-paint"
+              variant="secondary"
+              className="text-lg px-8 py-6"
             >
               <Zap className="w-5 h-5 mr-2" />
               Commencer
@@ -114,7 +123,7 @@ const Index = () => {
             <Button 
               size="lg" 
               variant="outline"
-              className="text-lg px-8 py-6 graffiti-button spray-paint"
+              className="text-lg px-8 py-6"
             >
               <Star className="w-5 h-5 mr-2" />
               Essayer la démo

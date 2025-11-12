@@ -4,44 +4,44 @@
 
 @layer base {
   :root {
-    /* BANKSY Street Art Palette */
-    --zena-turquoise: 0 0% 100%;
-    --zena-violet: 0 100% 50%;
-    --zena-rose: 350 85% 55%;
-    --zena-cream: 40 15% 92%;
-    --zena-night: 0 0% 8%;
+    /* Gaming Kawaii Palette */
+    --zena-turquoise: 170 70% 50%;
+    --zena-violet: 270 70% 60%;
+    --zena-rose: 330 80% 65%;
+    --zena-cream: 50 100% 95%;
+    --zena-night: 0 0% 10%;
     
-    /* Emotion Colors - Street Art Style */
-    --emotion-calme: 200 15% 75%;
-    --emotion-fatigue: 240 8% 55%;
-    --emotion-joie: 45 95% 55%;
-    --emotion-stress: 0 85% 50%;
-    --emotion-motivation: 140 70% 45%;
-    --emotion-tristesse: 220 10% 50%;
-    --emotion-colere: 0 90% 40%;
-    --emotion-anxiete: 30 85% 45%;
+    /* Emotion Colors - Gaming Kawaii Style */
+    --emotion-calme: 200 60% 70%;
+    --emotion-fatigue: 240 30% 60%;
+    --emotion-joie: 50 100% 60%;
+    --emotion-stress: 0 85% 55%;
+    --emotion-motivation: 140 70% 50%;
+    --emotion-tristesse: 220 40% 55%;
+    --emotion-colere: 0 90% 50%;
+    --emotion-anxiete: 30 85% 50%;
     
-    /* Base Theme - Urban Concrete */
-    --background: 0 0% 95%;
-    --foreground: 0 0% 8%;
-    --card: 0 0% 98%;
-    --card-foreground: 0 0% 8%;
-    --popover: 0 0% 98%;
-    --popover-foreground: 0 0% 8%;
-    --primary: 0 0% 8%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 85% 50%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 88%;
-    --muted-foreground: 0 0% 35%;
-    --accent: 0 85% 50%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 85% 50%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 20%;
-    --input: 0 0% 88%;
-    --ring: 0 0% 8%;
-    --radius: 0.125rem;
+    /* Base Theme - Gaming Kawaii */
+    --background: 270 60% 97%;
+    --foreground: 270 70% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 270 70% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 270 70% 15%;
+    --primary: 270 70% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 50 100% 60%;
+    --secondary-foreground: 270 70% 15%;
+    --muted: 270 30% 90%;
+    --muted-foreground: 270 30% 40%;
+    --accent: 170 70% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 85% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 270 30% 80%;
+    --input: 270 30% 90%;
+    --ring: 270 70% 60%;
+    --radius: 1rem;
     
     /* Street Art Effects */
     --spray-shadow: 0 0 15px hsla(0 0% 0% / 0.6);
@@ -51,23 +51,23 @@
   }
 
   .dark {
-    --background: 0 0% 8%;
-    --foreground: 0 0% 95%;
-    --card: 0 0% 12%;
-    --card-foreground: 0 0% 95%;
-    --popover: 0 0% 12%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 8%;
-    --secondary: 0 85% 50%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 20%;
-    --muted-foreground: 0 0% 65%;
-    --accent: 0 85% 50%;
-    --accent-foreground: 0 0% 98%;
-    --border: 0 0% 25%;
-    --input: 0 0% 20%;
-    --ring: 0 0% 98%;
+    --background: 270 50% 10%;
+    --foreground: 270 20% 95%;
+    --card: 270 40% 15%;
+    --card-foreground: 270 20% 95%;
+    --popover: 270 40% 15%;
+    --popover-foreground: 270 20% 95%;
+    --primary: 270 70% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 50 100% 60%;
+    --secondary-foreground: 270 70% 15%;
+    --muted: 270 30% 25%;
+    --muted-foreground: 270 20% 70%;
+    --accent: 170 70% 50%;
+    --accent-foreground: 0 0% 100%;
+    --border: 270 30% 30%;
+    --input: 270 30% 25%;
+    --ring: 270 70% 60%;
   }
 }
 
