@@ -1,32 +1,36 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { useZenaChat, AIModel } from "@/hooks/useZenaChat";
 import { ZenaAvatar } from "@/components/zena/ZenaAvatar";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, Send, Mic } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
-
-interface Message {
-  role: 'user' | 'assistant';
-  content: string;
-  timestamp: Date;
-}
+import { ArrowLeft, Send, Mic, Sparkles, Settings } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { ModelSelector } from "@/components/chat/ModelSelector";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function Chat() {
   const navigate = useNavigate();
   const { user, currentMember, loading } = useAuth();
-  const { toast } = useToast();
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: 'assistant',
-      content: 'Bonjour ! Je suis ZÉNA, votre compagnonne émotionnelle. Comment te sens-tu aujourd\'hui ? 🌟',
-      timestamp: new Date()
-    }
-  ]);
   const [input, setInput] = useState('');
-  const [sending, setSending] = useState(false);
+  const [mode, setMode] = useState<'ai' | 'demo'>('ai');
+  const [model, setModel] = useState<AIModel>('google/gemini-2.5-flash');
+  const [showSettings, setShowSettings] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  
+  const { messages, sending, sendMessage } = useZenaChat({
+    memberRole: currentMember?.role === 'parent' ? 'parent' : 'ado',
+    mode,
+    model
+  });
 
   useEffect(() => {
     if (!loading && !user) {
@@ -40,27 +44,8 @@ export default function Chat() {
 
   const handleSend = async () => {
     if (!input.trim() || sending) return;
-
-    const userMessage: Message = {
-      role: 'user',
-      content: input.trim(),
-      timestamp: new Date()
-    };
-
-    setMessages(prev => [...prev, userMessage]);
+    await sendMessage(input);
     setInput('');
-    setSending(true);
-
-    // Simuler une réponse de ZÉNA (à remplacer par l'appel à l'edge function)
-    setTimeout(() => {
-      const aiMessage: Message = {
-        role: 'assistant',
-        content: 'Merci de partager tes émotions avec moi. Je comprends ce que tu ressens. Comment puis-je t\'aider aujourd\'hui ? 💙',
-        timestamp: new Date()
-      };
-      setMessages(prev => [...prev, aiMessage]);
-      setSending(false);
-    }, 1500);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -87,20 +72,64 @@ export default function Chat() {
       {/* Header */}
       <header className="bg-zena-night/50 backdrop-blur-lg border-b border-white/10 sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center gap-3">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => navigate("/dashboard")}
-              className="text-muted-foreground hover:text-foreground"
-            >
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-            <ZenaAvatar size="sm" />
-            <div>
-              <h1 className="text-lg font-semibold text-foreground">ZÉNA</h1>
-              <p className="text-xs text-zena-turquoise">En ligne</p>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => navigate("/dashboard")}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <ArrowLeft className="h-5 w-5" />
+              </Button>
+              <ZenaAvatar size="sm" />
+              <div>
+                <h1 className="text-lg font-semibold text-foreground">ZÉNA</h1>
+                <div className="flex items-center gap-2">
+                  <p className="text-xs text-zena-turquoise">En ligne</p>
+                  {mode === 'ai' && (
+                    <Badge variant="outline" className="text-xs border-zena-turquoise/30 text-zena-turquoise">
+                      <Sparkles className="h-3 w-3 mr-1" />
+                      IA Active
+                    </Badge>
+                  )}
+                  {mode === 'demo' && (
+                    <Badge variant="outline" className="text-xs border-zena-violet/30 text-zena-violet">
+                      Mode Démo
+                    </Badge>
+                  )}
+                </div>
+              </div>
             </div>
+            <DropdownMenu open={showSettings} onOpenChange={setShowSettings}>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  <Settings className="h-5 w-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuLabel>Paramètres ZÉNA</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => setMode(mode === 'ai' ? 'demo' : 'ai')}>
+                  {mode === 'ai' ? '🎭 Passer en mode Démo' : '✨ Activer l\'IA'}
+                </DropdownMenuItem>
+                {mode === 'ai' && (
+                  <>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuLabel className="text-xs text-muted-foreground">
+                      Modèle IA
+                    </DropdownMenuLabel>
+                    <div className="px-2 py-2">
+                      <ModelSelector value={model} onChange={setModel} disabled={sending} />
+                    </div>
+                  </>
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </header>
