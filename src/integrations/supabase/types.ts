@@ -360,7 +360,7 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "parent" | "ado"
+      app_role: "parent" | "ado" | "admin"
       emotion_type:
         | "calme"
         | "fatigue"
@@ -370,7 +370,14 @@ export type Database = {
         | "tristesse"
         | "colere"
         | "anxiete"
-      family_role: "parent" | "ado" | "enfant" | "parrain" | "tuteur" | "autre"
+      family_role:
+        | "parent"
+        | "ado"
+        | "enfant"
+        | "parrain"
+        | "tuteur"
+        | "autre"
+        | "admin"
       nudge_type: "message" | "drawing" | "sound"
       weather_type: "soleil" | "nuages" | "pluie" | "eclaircies"
     }
@@ -500,7 +507,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["parent", "ado"],
+      app_role: ["parent", "ado", "admin"],
       emotion_type: [
         "calme",
         "fatigue",
@@ -511,7 +518,15 @@ export const Constants = {
         "colere",
         "anxiete",
       ],
-      family_role: ["parent", "ado", "enfant", "parrain", "tuteur", "autre"],
+      family_role: [
+        "parent",
+        "ado",
+        "enfant",
+        "parrain",
+        "tuteur",
+        "autre",
+        "admin",
+      ],
       nudge_type: ["message", "drawing", "sound"],
       weather_type: ["soleil", "nuages", "pluie", "eclaircies"],
     },
