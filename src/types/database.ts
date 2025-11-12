@@ -1,5 +1,5 @@
-export type AppRole = 'parent' | 'ado';
-export type FamilyRole = 'parent' | 'ado' | 'enfant' | 'parrain' | 'tuteur' | 'autre';
+export type AppRole = 'parent' | 'ado' | 'admin';
+export type FamilyRole = 'parent' | 'ado' | 'enfant' | 'parrain' | 'tuteur' | 'autre' | 'admin';
 export type EmotionType = 'calme' | 'fatigue' | 'joie' | 'stress' | 'motivation' | 'tristesse' | 'colere' | 'anxiete';
 export type WeatherType = 'soleil' | 'nuages' | 'pluie' | 'eclaircies';
 export type NudgeType = 'message' | 'drawing' | 'sound';

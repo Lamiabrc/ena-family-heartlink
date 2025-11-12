@@ -87,21 +87,28 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-zena-turquoise/10 via-zena-violet/10 to-zena-rose/10 p-4">
-      <div className="w-full max-w-md space-y-6">
+    <div className="min-h-screen flex items-center justify-center bg-background p-4 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-5" style={{
+        backgroundImage: `repeating-linear-gradient(90deg, transparent, transparent 35px, #000 35px, #000 36px),
+                         repeating-linear-gradient(0deg, transparent, transparent 35px, #000 35px, #000 36px)`
+      }}></div>
+      
+      <div className="w-full max-w-md space-y-6 relative z-10">
         <div className="flex flex-col items-center space-y-4">
-          <ZenaAvatar size="lg" />
+          <div className="spray-shadow">
+            <ZenaAvatar size="lg" />
+          </div>
           <div className="text-center">
-            <h1 className="text-3xl font-bold">ZÉNA Family</h1>
-            <p className="text-muted-foreground">La voix qui relie les cœurs</p>
+            <h1 className="text-5xl font-bold stencil-text tracking-wider">ZÉNA</h1>
+            <p className="text-lg font-bold uppercase tracking-wide mt-2">La Voix Des Cœurs</p>
           </div>
         </div>
 
-        <Card>
+        <Card className="graffiti-border border-foreground shadow-2xl">
           <CardHeader>
-            <CardTitle>Accès à votre espace</CardTitle>
-            <CardDescription>
-              Connectez-vous ou créez votre compte familial
+            <CardTitle className="stencil-text">ACCÈS</CardTitle>
+            <CardDescription className="uppercase font-bold">
+              Connexion / Inscription
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -188,6 +195,10 @@ export default function Auth() {
                         <RadioGroupItem value="ado" id="ado" />
                         <Label htmlFor="ado">Ado</Label>
                       </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="admin" id="admin" />
+                        <Label htmlFor="admin">🔧 Admin (Test complet)</Label>
+                      </div>
                     </RadioGroup>
                   </div>
                   <Button type="submit" className="w-full" disabled={loading}>
@@ -200,13 +211,13 @@ export default function Auth() {
         </Card>
 
         <div className="text-center space-y-2">
-          <p className="text-sm text-muted-foreground">Ou découvrez ZÉNA sans créer de compte</p>
+          <p className="text-sm uppercase font-bold">Sans Compte</p>
           <Button
             variant="outline"
-            className="w-full border-zena-turquoise/30 text-zena-turquoise hover:bg-zena-turquoise/10"
+            className="w-full graffiti-border hover:bg-accent hover:text-accent-foreground transition-rough"
             onClick={() => navigate("/dashboard?demo=true")}
           >
-            🎭 Essayer en mode Démo
+            🎭 MODE DÉMO
           </Button>
         </div>
       </div>
