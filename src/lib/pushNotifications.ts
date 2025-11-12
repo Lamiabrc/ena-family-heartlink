@@ -19,19 +19,20 @@ export async function registerPushNotifications(userId: string) {
       PushNotifications.addListener('registration', async (token: Token) => {
         console.log('Push registration success, token:', token.value);
         
-        // Store token in Supabase (temporarily commented until DB migration)
-        // const { error } = await supabase
-        //   .from('profiles')
-        //   .update({ 
-        //     push_token: token.value,
-        //     platform: Capacitor.getPlatform()
-        //   })
-        //   .eq('id', userId);
-        // if (error) {
-        //   console.error('Error storing push token:', error);
-        // }
-        
-        console.log('Push token received:', token.value);
+        // Store token in Supabase
+        const { error } = await supabase
+          .from('profiles')
+          .update({ 
+            push_token: token.value,
+            platform: Capacitor.getPlatform()
+          })
+          .eq('id', userId);
+          
+        if (error) {
+          console.error('Error storing push token:', error);
+        } else {
+          console.log('Push token stored successfully:', token.value);
+        }
       });
 
       // Listener for errors
@@ -62,11 +63,11 @@ export async function unregisterPushNotifications(userId: string) {
   if (!Capacitor.isNativePlatform()) return;
 
   try {
-    // Remove token from Supabase (temporarily commented until DB migration)
-    // await supabase
-    //   .from('profiles')
-    //   .update({ push_token: null })
-    //   .eq('id', userId);
+    // Remove token from Supabase
+    await supabase
+      .from('profiles')
+      .update({ push_token: null, platform: null })
+      .eq('id', userId);
 
     // Remove all listeners
     await PushNotifications.removeAllListeners();
