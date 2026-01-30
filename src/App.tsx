@@ -30,6 +30,9 @@ const App = () => (
       <MobileWrapper>
         <Toaster />
         <Sonner />
+        <div className="w-full border-b border-white/10 bg-zena-night/70 text-center text-[0.65rem] uppercase tracking-[0.35em] text-muted-foreground">
+          <div className="mx-auto max-w-6xl px-4 py-2">Écouter • Protéger • Agir</div>
+        </div>
         <BrowserRouter>
           <Routes>
             {/* 🏠 Accueil Zéna Family */}
